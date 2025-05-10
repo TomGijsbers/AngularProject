@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* neutral surfaces */
+  --surface-ground: #f4f6fb;
+  --surface-card:   #ffffffee;   /* cards half‑transparent voor glass‑effect */
+  --surface-border: #e5e7eb;
+
+  /* primaire accentkleur → fris turquoise / mint */
+  --primary-500: #14b89a;
+  --primary-600: #0fa385;
+  --primary-700: #0b8d71;
+
+  /* secundaire accent (voor gradients) */
+  --primary-a-400: #2dd4bfcc;   /* 80% alpha */
+
+  /* tekst */
+  --text-color: #1f2937;
+  --text-color-secondary: #475569;
+}
+
+body {
+  @apply min-h-screen text-gray-800;
+  background: linear-gradient(135deg,#e0f7fa 0%,#dbeafe 100%);
+}

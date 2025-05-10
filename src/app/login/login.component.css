@@ -1,0 +1,4 @@
+/* Add red background for better visibility */
+:host {
+    background-color: red;
+}

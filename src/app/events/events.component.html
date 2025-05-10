@@ -1,0 +1,213 @@
+<div class="min-h-screen gradient-bg p-6">
+  <!-- Page Header -->
+  <header class="mb-10">
+    <h1 class="text-4xl font-bold text-slate-800 text-center">Upcoming Events</h1>
+    <p class="text-slate-600 text-center mt-2">Discover and join amazing events near you</p>
+  </header>
+
+  <!-- Events Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let event of events" 
+        class="event-card neumorph p-4 cursor-pointer" 
+        (click)="showEventDetails(event)">
+      <div class="relative">
+        <img [src]="event.coverImage" alt="Event cover" class="w-full h-48 object-cover rounded-lg" />
+        <div class="absolute top-2 right-2">
+          <p-chip *ngFor="let tag of event.tags.slice(0,1)" 
+                [label]="tag" 
+                class="glass text-xs mr-1">
+          </p-chip>
+        </div>
+      </div>
+      
+      <div class="mt-4">
+        <h3 class="text-xl font-semibold text-slate-800">{{ event.name }}</h3>
+        <div class="flex items-center mt-2 text-slate-600">
+          <i class="pi pi-calendar mr-2"></i>
+          <span>{{ event.date | date:'mediumDate' }}</span>
+        </div>
+        
+        <div class="flex items-center justify-between mt-3">
+          <div class="flex items-center">
+            <span class="text-sm text-slate-700">{{ event.organizer.name }}</span>
+          </div>
+          <div class="text-sm text-slate-600">
+            {{ event.participants.length }}/{{ event.maxParticipants }} joined
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Event Button -->
+  <button pButton 
+          icon="pi pi-plus" 
+          label="Create Event" 
+          class="create-btn neumorph p-button-rounded p-button-lg"
+          (click)="onCreateEvent()">
+  </button>
+
+  <!-- Event Details Dialog -->
+  <p-dialog [(visible)]="detailsVisible" 
+            [modal]="true" 
+            [style]="{width: '90%', maxWidth: '800px'}" 
+            [draggable]="false" 
+            [resizable]="false"
+            styleClass="glass rounded-xl">
+    <ng-template pTemplate="header" *ngIf="selectedEvent">
+      <div class="flex justify-between items-center w-full">
+        <h2 class="text-2xl font-bold m-0 text-slate-800">{{ selectedEvent.name }}</h2>
+        <div>
+          <p-chip *ngFor="let tag of selectedEvent.tags" 
+                [label]="tag" 
+                class="mr-1">
+          </p-chip>
+        </div>
+      </div>
+    </ng-template>
+    
+    <ng-template pTemplate="content" *ngIf="selectedEvent">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Left column -->
+        <div>
+          <img [src]="selectedEvent.coverImage" 
+               alt="Event cover" 
+               class="w-full h-64 object-cover rounded-lg shadow-lg">
+          
+          <div class="mt-6">
+            <div class="flex items-center mb-3">
+              <i class="pi pi-calendar mr-2 text-blue-500"></i>
+              <span class="text-slate-700">{{ selectedEvent.date | date:'fullDate' }} at {{ selectedEvent.time }}</span>
+            </div>
+            
+            <div class="flex items-center mb-5">
+              <i class="pi pi-map-marker mr-2 text-blue-500"></i>
+              <span class="text-slate-700">{{ selectedEvent.location.address }}</span>
+            </div>
+            
+            <div class="map-container neumorph-inset">
+              <!-- Replace GMap with iframe -->
+              <iframe 
+                [src]="getMapUrl(selectedEvent)" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <div class="flex items-center mb-4 pb-4 border-b border-slate-200">
+            <div class="ml-3">
+              <h3 class="m-0 text-lg font-medium">{{ selectedEvent.organizer.name }}</h3>
+              <p class="m-0 text-sm text-slate-600">Organizer</p>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <h3 class="text-lg font-medium mb-2">About this event</h3>
+            <p class="text-slate-600">{{ selectedEvent.description }}</p>
+          </div>
+          
+          <div class="mb-4">
+            <h3 class="text-lg font-medium mb-2">Participants ({{ selectedEvent.participants.length }}/{{ selectedEvent.maxParticipants }})</h3>
+            <div class="participants-container max-h-32 overflow-y-auto neumorph-inset p-3">
+              <div *ngFor="let participant of selectedEvent.participants" class="flex items-center mb-2">
+                <span class="ml-2 text-sm">{{ participant.name }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <button pButton 
+                  [label]="selectedEvent.isJoined ? 'Leave Event' : 'Join Event'" 
+                  [icon]="selectedEvent.isJoined ? 'pi pi-times' : 'pi pi-check'" 
+                  [class]="selectedEvent.isJoined ? 'p-button-danger' : 'p-button-success'" 
+                  class="w-full neumorph"
+                  [disabled]="!selectedEvent.isJoined && selectedEvent.participants.length >= selectedEvent.maxParticipants"
+                  (click)="toggleJoinEvent(selectedEvent)">
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+  <!-- Create Event Dialog -->
+  <p-dialog header="Create New Event" 
+            [(visible)]="createEventVisible" 
+            [modal]="true" 
+            [style]="{width: '90%', maxWidth: '600px'}" 
+            [draggable]="false" 
+            [resizable]="false"
+            styleClass="glass rounded-xl">
+    
+    <div class="p-fluid grid gap-4 neumorph-inset p-6 rounded-lg">
+      <!-- Event Title -->
+      <div class="field col-12">
+        <label for="name" class="block text-slate-700 font-medium mb-2">Event Name</label>
+        <input id="name" type="text" pInputText [(ngModel)]="newEvent.name" required class="w-full">
+      </div>
+
+      <!-- Date and Time -->
+      <div class="field col-12 md:col-6">
+        <label for="date" class="block text-slate-700 font-medium mb-2">Date</label>
+        <p-calendar id="date" [(ngModel)]="newEvent.date" [showIcon]="true" dateFormat="dd/mm/yy" required class="w-full"></p-calendar>
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="time" class="block text-slate-700 font-medium mb-2">Time</label>
+        <input id="time" type="text" pInputText [(ngModel)]="newEvent.time" placeholder="e.g., 06:30 PM" class="w-full">
+      </div>
+
+      <!-- Location Address -->
+      <div class="field col-12">
+        <label for="location" class="block text-slate-700 font-medium mb-2">Location Address</label>
+        <input id="location" type="text" pInputText [(ngModel)]="newEvent.location!.address" required class="w-full">
+      </div>
+
+      <!-- Cover Image URL -->
+      <div class="field col-12">
+        <label for="coverImage" class="block text-slate-700 font-medium mb-2">Cover Image URL (Optional)</label>
+        <input id="coverImage" type="text" pInputText [(ngModel)]="newEvent.coverImage" class="w-full">
+      </div>
+
+      <!-- Description -->
+      <div class="field col-12">
+        <label for="description" class="block text-slate-700 font-medium mb-2">Description (Optional)</label>
+        <textarea id="description" pInputTextarea [(ngModel)]="newEvent.description" rows="3" class="w-full"></textarea>
+      </div>
+
+      <!-- Max Participants -->
+      <div class="field col-12 md:col-6">
+        <label for="maxParticipants" class="block text-slate-700 font-medium mb-2">Max Participants (Optional)</label>
+        <p-inputNumber id="maxParticipants" [(ngModel)]="newEvent.maxParticipants" [showButtons]="true" [min]="1" class="w-full"></p-inputNumber>
+      </div>
+
+      <!-- Tags -->
+      <div class="field col-12 md:col-6">
+        <label for="tags" class="block text-slate-700 font-medium mb-2">Tags (Optional)</label>
+        <div class="flex flex-wrap gap-2">
+          <p-chip *ngFor="let tag of newEvent.tags; let i = index" 
+                [label]="tag" 
+                [removable]="true" 
+                (onRemove)="newEvent.tags?.splice(i, 1)"></p-chip>
+          <div class="flex items-center">
+            <input #tagInput type="text" pInputText placeholder="Add tag" class="w-28"
+                  (keyup.enter)="newEvent.tags?.push(tagInput.value); tagInput.value = ''">
+            <button pButton type="button" icon="pi pi-plus" 
+                    (click)="newEvent.tags?.push(tagInput.value); tagInput.value = ''"
+                    class="ml-2"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <button pButton label="Cancel" icon="pi pi-times" (click)="cancelCreateEvent()" class="p-button-text neumorph"></button>
+      <button pButton label="Save Event" icon="pi pi-check" (click)="submitNewEvent()" class="neumorph"></button>
+    </ng-template>
+  </p-dialog>
+</div>

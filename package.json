@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --ssl",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -18,7 +18,15 @@
     "@angular/platform-browser": "^18.1.0",
     "@angular/platform-browser-dynamic": "^18.1.0",
     "@angular/router": "^18.1.0",
+    "@auth0/auth0-angular": "^2.2.3",
+    "@primeng/themes": "^18.0.2",
+    "chart.js": "^4.4.9",
+    "json-server": "^0.17.4",
+    "primeflex": "^4.0.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^18.0.2",
     "rxjs": "~7.8.0",
+    "tailwindcss": "^3.4.17",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },
@@ -26,6 +34,7 @@
     "@angular-devkit/build-angular": "^18.1.0",
     "@angular/cli": "^18.1.0",
     "@angular/compiler-cli": "^18.1.0",
+    "@types/googlemaps": "^3.43.3",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",

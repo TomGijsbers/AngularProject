@@ -1,0 +1,447 @@
+:root {
+    --primary-gradient: linear-gradient(135deg, #a288e3, #7b68ee);
+    --secondary-gradient: linear-gradient(135deg, #89f7fe, #66a6ff);
+    --success-gradient: linear-gradient(135deg, #86efac, #4ade80);
+    --danger-gradient: linear-gradient(135deg, #fda4af, #f43f5e);
+    
+    /* Text colors with better contrast */
+    --text-primary: #ffffff;
+    --text-secondary: #e0e7ff;
+    --text-tertiary: #c7d2fe;
+    --text-dark: #1e293b;
+    --text-accent: #a288e3;
+}
+  
+  
+.profile-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+  
+/* Neumorphic card styling */
+:host ::ng-deep p-card .p-card {
+    background: var(--surface-card);       /* uit tokens */
+    backdrop-filter: blur(12px);
+    border: 1px solid #ffffff40;
+    box-shadow: 0 8px 24px #00000014;
+}
+  
+:host ::ng-deep .p-tabview .p-tabview-nav-link {
+    @apply rounded-xl shadow-sm transition;
+    background: var(--surface-card);
+    color: var(--text-secondary);
+}
+:host ::ng-deep .p-tabview .p-highlight .p-tabview-nav-link {
+    background: linear-gradient(135deg,#2dd4bf 0%,#14b8a6 100%);
+    color: var(--text-primary);
+}
+  
+:host ::ng-deep .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    background: var(--primary-gradient);
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(123, 104, 238, 0.4);
+    color: var(--text-primary);
+}
+  
+/* Form controls */
+:host ::ng-deep .p-inputtext, 
+:host ::ng-deep .p-dropdown, 
+:host ::ng-deep .p-calendar .p-inputtext,
+:host ::ng-deep .p-inputtextarea {
+    background: rgba(40, 44, 68, 0.6);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+  
+:host ::ng-deep .p-inputtext:focus,
+:host ::ng-deep .p-dropdown:focus,
+:host ::ng-deep .p-calendar .p-inputtext:focus,
+:host ::ng-deep .p-inputtextarea:focus {
+    border-color: #a288e3;
+    box-shadow: 
+      0 0 0 1px rgba(162, 136, 227, 0.3),
+      inset 0 0 8px rgba(162, 136, 227, 0.1);
+}
+  
+:host ::ng-deep .p-float-label {
+    display: block;
+    margin-bottom: 1.5rem;
+}
+  
+:host ::ng-deep .p-float-label input,
+:host ::ng-deep .p-float-label textarea,
+:host ::ng-deep .p-float-label .p-dropdown {
+    width: 100%;
+}
+  
+:host ::ng-deep .p-float-label label {
+    color: #c7d2fe;
+    background: transparent;
+}
+  
+/* Avatar */
+:host ::ng-deep .p-avatar.p-avatar-xlarge {
+    width: 7rem;
+    height: 7rem;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+  
+/* File upload */
+:host ::ng-deep .p-fileupload-buttonbar {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+  
+:host ::ng-deep .p-fileupload .p-button {
+    background: rgba(123, 104, 238, 0.2);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(123, 104, 238, 0.3);
+    box-shadow: 
+      2px 2px 5px rgba(0, 0, 0, 0.2),
+      -2px -2px 5px rgba(255, 255, 255, 0.05);
+}
+  
+/* Button styling - Enhanced for better visibility */
+:host ::ng-deep .p-button {
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+  
+:host ::ng-deep .p-button:not(.p-button-text):not(.p-button-outlined) {
+  background: linear-gradient(135deg, #a288e3 0%, #7b68ee 100%);
+  color: #fff;
+}
+  
+:host ::ng-deep .p-button:not(.p-button-text):not(.p-button-outlined):hover {
+    background: linear-gradient(135deg, #b69df0, #8f7ef8);
+    box-shadow: 
+      0 6px 15px rgba(123, 104, 238, 0.7),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+  
+:host ::ng-deep .p-button.p-button-text {
+    color: #c4b0ff;
+    background: rgba(162, 136, 227, 0.1);
+    border: 1px solid rgba(162, 136, 227, 0.2);
+}
+
+:host ::ng-deep .p-button.p-button-text:hover {
+    background: rgba(162, 136, 227, 0.25);
+    color: #dfccff;
+}
+  
+:host ::ng-deep .p-button.p-button-danger {
+    background: var(--danger-gradient);
+    box-shadow: 0 4px 10px rgba(244, 63, 94, 0.5);
+}
+
+:host ::ng-deep .p-button.p-button-danger:hover {
+    background: linear-gradient(135deg, #ff5d7a, #ff3f61);
+    box-shadow: 0 6px 15px rgba(244, 63, 94, 0.7);
+}
+  
+:host ::ng-deep .p-button-outlined.p-button-danger {
+    color: #ff5d7a;
+    border-color: #ff5d7a;
+    background: rgba(244, 63, 94, 0.1);
+}
+
+:host ::ng-deep .p-button-outlined.p-button-danger:hover {
+    background: rgba(244, 63, 94, 0.2);
+    border-color: #ff3f61;
+    color: #ff3f61;
+}
+  
+:host ::ng-deep .p-button .p-button-label {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+:host ::ng-deep .p-button.p-button-text .p-button-label {
+    color: #c4b0ff;
+}
+
+:host ::ng-deep .p-button.p-button-text:hover .p-button-label {
+    color: #dfccff;
+}
+
+:host ::ng-deep .p-button.p-button-outlined {
+    border: 2px solid #a288e3;
+    background: rgba(162, 136, 227, 0.1);
+    color: #c4b0ff;
+}
+
+:host ::ng-deep .p-button.p-button-outlined:hover {
+    background: rgba(162, 136, 227, 0.25);
+    border-color: #b69df0;
+    color: #dfccff;
+}
+
+/* Divider */
+:host ::ng-deep .p-divider {
+    margin: 1.5rem 0;
+    opacity: 0.2;
+}
+  
+/* Input switch */
+:host ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+    background: var(--primary-gradient);
+}
+  
+/* Toast */
+:host ::ng-deep .p-toast .p-toast-message.p-toast-message-success {
+    background: rgba(134, 239, 172, 0.9);
+    backdrop-filter: blur(10px);
+    border-left: 6px solid #4ade80;
+}
+
+:host ::ng-deep .p-toast .p-toast-message .p-toast-message-content .p-toast-summary {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+:host ::ng-deep .p-toast .p-toast-message .p-toast-message-content .p-toast-detail {
+    color: var(--text-dark);
+}
+  
+/* Media Gallery */
+.media-gallery-container {
+    margin-top: 1rem;
+}
+  
+.media-item {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+  
+.media-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+  
+.media-thumbnail {
+    position: relative;
+}
+  
+.video-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+  
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 
+      0 4px 12px rgba(0, 0, 0, 0.1),
+      inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.glass-card h4 {
+    color: var(--text-primary);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card p {
+    color: var(--text-secondary);
+}
+  
+.add-media-card {
+    height: 100%;
+    min-height: 200px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px dashed rgba(102, 166, 255, 0.3);
+}
+
+.add-media-card p {
+    color: var(--text-accent);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+  
+.add-media-card:hover {
+    border-color: rgba(162, 136, 227, 0.6);
+    background: rgba(162, 136, 227, 0.1);
+    transform: translateY(-5px);
+}
+  
+/* Comments Section */
+.comments-container {
+    padding: 1rem;
+}
+
+.comment-item h4 {
+    color: var(--text-primary);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.comment-item p {
+    color: var(--text-primary);
+}
+
+.comment-item .text-sm {
+    color: var(--text-secondary);
+}
+  
+.glassmorphic-container {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 
+      0 4px 15px rgba(0, 0, 0, 0.1),
+      inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.glassmorphic-container h3 {
+    color: var(--text-primary);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+  
+.glassmorphic-card {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.glassmorphic-card p {
+    color: var(--text-secondary);
+}
+
+.glassmorphic-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+  
+/* Edit Dialog */
+:host ::ng-deep .edit-profile-dialog {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+  
+:host ::ng-deep .edit-profile-dialog .p-dialog-content {
+    background: linear-gradient(135deg, rgba(40, 44, 68, 0.9), rgba(30, 34, 58, 0.9));
+    backdrop-filter: blur(20px);
+    color: var(--text-secondary);
+}
+  
+:host ::ng-deep .edit-profile-dialog .p-dialog-header {
+    background: linear-gradient(135deg, rgba(50, 54, 78, 0.9), rgba(40, 44, 68, 0.9));
+    color: var(--text-primary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+  
+:host ::ng-deep .edit-profile-dialog .p-dialog-footer {
+    background: rgba(40, 44, 68, 0.9);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+  
+/* Media Dialog */
+:host ::ng-deep .media-dialog .p-dialog-content {
+    background: linear-gradient(135deg, rgba(20, 24, 48, 0.95), rgba(10, 14, 38, 0.95));
+    backdrop-filter: blur(20px);
+    padding: 0;
+    color: var(--text-secondary);
+}
+
+:host ::ng-deep .media-dialog h3 {
+    color: var(--text-primary);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+:host ::ng-deep .media-dialog p {
+    color: var(--text-secondary);
+}
+
+/* Dropdown items */
+:host ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    color: var(--text-dark);
+}
+
+:host ::ng-deep .p-dropdown .p-dropdown-label {
+    color: var(--text-primary);
+}
+
+/* Custom Button - Glass effect (Enhanced) */
+.glass-button {
+    background: rgba(162, 136, 227, 0.3) !important;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(196, 176, 255, 0.4) !important;
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    color: white !important;
+}
+  
+.glass-button:hover {
+    background: rgba(196, 176, 255, 0.4) !important;
+    box-shadow: 
+      0 6px 12px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.glass-button .p-button-label {
+    color: white !important;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Action button container - adding subtle background for better button visibility */
+.flex.justify-end.mt-6.gap-3 {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+}
+
+/* "Post Comment" button specific styling */
+:host ::ng-deep .p-button[icon="pi pi-send"] {
+    background: linear-gradient(135deg, #66a6ff, #4f8df9);
+    box-shadow: 0 4px 10px rgba(102, 166, 255, 0.5);
+}
+
+:host ::ng-deep .p-button[icon="pi pi-send"]:hover {
+    background: linear-gradient(135deg, #7db5ff, #5a9bfa);
+    box-shadow: 0 6px 15px rgba(102, 166, 255, 0.7);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .profile-header-details {
+      text-align: center;
+    }
+    
+    .media-gallery-container .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+}
+  
+@media screen and (max-width: 480px) {
+    .media-gallery-container .grid {
+      grid-template-columns: 1fr;
+    }
+}

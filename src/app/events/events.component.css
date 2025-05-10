@@ -1,0 +1,66 @@
+.neumorph {
+  border-radius: 16px;
+  background: #f0f4f8;
+  box-shadow: 5px 5px 10px #d1d9e6, -5px -5px 10px #ffffff;
+}
+
+.neumorph-inset {
+  border-radius: 16px;
+  background: #f0f4f8;
+  box-shadow: inset 5px 5px 10px #d1d9e6, inset -5px -5px 10px #ffffff;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #a5f3fc, #bae6fd, #dbeafe);
+}
+
+.event-card {
+  transition: all 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+}
+
+.create-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10;
+}
+
+.p-dialog-mask {
+  backdrop-filter: blur(5px);
+}
+
+.p-avatar img {
+  object-fit: cover;
+}
+
+.map-container {
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Custom scrollbar for participants list */
+.participants-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.participants-container::-webkit-scrollbar-track {
+  background: rgba(241, 245, 249, 0.5);
+  border-radius: 10px;
+}
+
+.participants-container::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.5);
+  border-radius: 10px;
+}

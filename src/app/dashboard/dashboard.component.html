@@ -1,0 +1,94 @@
+<!-- src/app/dashboard.component.html -->
+<div class="dashboard-container p-4">
+  <div class="mb-4">
+    <h1 class="text-3xl font-bold">Dashboard</h1>
+    <p class="text-gray-600">Welcome to your news application dashboard</p>
+  </div>
+
+  <!-- Stats Overview Section -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div *ngFor="let stat of statistics" class="stat-card bg-white p-4 rounded-lg shadow">
+      <div class="flex items-center">
+        <div class="stat-icon mr-4">
+          <i class="pi {{stat.icon}} text-4xl" [ngClass]="stat.iconClass"></i>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold">{{stat.value}}</h3>
+          <p class="text-gray-600">{{stat.label}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Recent News Section -->
+    <div class="lg:col-span-2">
+      <div class="bg-white p-4 rounded-lg shadow mb-6">
+        <h2 class="text-xl font-bold mb-4">Recent News</h2>
+        <p-table [value]="recentNews" styleClass="p-datatable-sm" [tableStyle]="{'min-width': '50rem'}">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-news>
+            <tr>
+              <td>{{news.title}}</td>
+              <td><span class="category-badge p-1 px-2 rounded text-xs" [ngClass]="news.categoryClass">{{news.category}}</span></td>
+              <td>{{news.date}}</td>
+              <td>
+                <button pButton icon="pi pi-eye" class="p-button-rounded p-button-text p-button-sm"></button>
+                <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-sm"></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+      <!-- Activity Chart -->
+      <div class="bg-white p-4 rounded-lg shadow">
+        <h2 class="text-xl font-bold mb-4">Engagement Analytics</h2>
+        <p-chart type="line" [data]="chartData" [options]="chartOptions" height="250px"></p-chart>
+      </div>
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="lg:col-span-1">
+      <!-- Quick Actions -->
+      <div class="bg-white p-4 rounded-lg shadow mb-6">
+        <h2 class="text-xl font-bold mb-4">Quick Actions</h2>
+        <div class="flex flex-col gap-2">
+          <p-button label="Create New Article" icon="pi pi-plus" styleClass="p-button-primary w-full mb-2"></p-button>
+          <p-button label="Manage Categories" icon="pi pi-tags" styleClass="p-button-secondary w-full mb-2"></p-button>
+          <p-button label="User Settings" icon="pi pi-cog" styleClass="p-button-help w-full" (click)="hello()"></p-button>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="bg-white p-4 rounded-lg shadow">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-bold">Notifications</h2>
+          <span class="p-badge p-badge-warning">{{notifications.length}}</span>
+        </div>
+        <ul class="notification-list">
+          <li *ngFor="let notification of notifications" class="notification-item p-3 border-b border-gray-200 last:border-b-0">
+            <div class="flex items-start">
+              <i class="pi {{notification.icon}} mr-3 text-xl" [ngClass]="notification.iconClass"></i>
+              <div>
+                <p class="font-medium">{{notification.message}}</p>
+                <p class="text-xs text-gray-500">{{notification.time}}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PrimeNG toast overlay -->
+<p-toast></p-toast>

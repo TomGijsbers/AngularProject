@@ -1,0 +1,248 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "firstName": "Tom",
+      "lastName": "Gijsbers",
+      "email": "tom@example.com",
+      "password": "bcryptHash",
+      "phone": "0486-123456",
+      "role": "ADMIN"
+    },
+    {
+      "id": "2",
+      "firstName": "Sarah",
+      "lastName": "Teamleider",
+      "email": "sarah@example.com",
+      "password": "bcryptHash",
+      "phone": "0497-654321",
+      "role": "TEAMLEADER"
+    },
+    {
+      "id": "3",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@example.com",
+      "password": "bcryptHash",
+      "phone": "(555) 123-4567",
+      "role": "USER"
+    }
+  ],
+  "locations": [
+    {
+      "id": "1",
+      "name": "Sporthal Den Akker",
+      "address": "Dorpstraat 15, 2340 Beerse",
+      "latitude": 51.325487,
+      "longitude": 4.86682
+    },
+    {
+      "id": "2",
+      "name": "IT Lab Campus Zuid",
+      "address": "Technologielaan 9, 3000 Leuven",
+      "latitude": 50.86423,
+      "longitude": 4.70854
+    },
+    {
+      "id": "3",
+      "name": "Mountain Trail Colorado",
+      "address": "123 Mountain Trail, Colorado",
+      "latitude": 39.7392,
+      "longitude": -104.9903
+    },
+    {
+      "id": "4",
+      "name": "Tech Hub SF",
+      "address": "456 Tech Avenue, San Francisco",
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    },
+    {
+      "id": "5",
+      "name": "Miami Beach",
+      "address": "789 Ocean Drive, Miami",
+      "latitude": 25.7617,
+      "longitude": -80.1918
+    }
+  ],
+  "events": [
+    {
+      "id": "1",
+      "name": "Intra-school LAN Party",
+      "eventType": "Tech",
+      "date": "2025-05-20",
+      "time": "18:30",
+      "coverImage": "/uploads/event-lan.jpg",
+      "location": {
+        "id": 2
+      },
+      "organizer": {
+        "id": 2,
+        "name": "Sarah Teamleider"
+      },
+      "description": "Bring your own PC and battle!",
+      "participants": [
+        {
+          "id": 1,
+          "name": "Tom Gijsbers"
+        },
+        {
+          "id": 3,
+          "name": "John Doe"
+        }
+      ],
+      "maxParticipants": 50,
+      "tags": [
+        "LAN",
+        "Gaming"
+      ],
+      "isJoined": false
+    },
+    {
+      "id": "2",
+      "name": "Zondagse Jogging",
+      "eventType": "Sport",
+      "date": "2025-05-12",
+      "time": "19:30",
+      "coverImage": "/uploads/event-jogging.jpg",
+      "location": {
+        "id": 1
+      },
+      "organizer": {
+        "id": 2,
+        "name": "Sarah Teamleider"
+      },
+      "description": "Gezellige 5 km in het dorp.",
+      "participants": [],
+      "maxParticipants": 20,
+      "tags": [
+        "Running",
+        "Community"
+      ],
+      "isJoined": false
+    },
+    {
+      "id": "3",
+      "name": "Mountain Hiking Adventure",
+      "eventType": "Sport",
+      "date": "2025-07-15",
+      "time": "08:00",
+      "coverImage": "/uploads/event-hiking.jpg",
+      "location": {
+        "id": 3
+      },
+      "organizer": {
+        "id": 2,
+        "name": "Sarah Teamleider"
+      },
+      "description": "Dagtocht in de Rockies, alle niveaus welkom.",
+      "participants": [
+        {
+          "id": 3,
+          "name": "John Doe"
+        }
+      ],
+      "maxParticipants": 20,
+      "tags": [
+        "Hiking",
+        "Outdoors",
+        "Nature"
+      ],
+      "isJoined": false
+    },
+    {
+      "id": "4",
+      "name": "Tech Meetup: AI Innovations",
+      "eventType": "Tech",
+      "date": "2025-07-22",
+      "time": "18:30",
+      "coverImage": "/uploads/event-ai.jpg",
+      "location": {
+        "id": 4
+      },
+      "organizer": {
+        "id": 3,
+        "name": "John Doe"
+      },
+      "description": "Ontdek de nieuwste AI-trends en netwerk met professionals.",
+      "participants": [
+        {
+          "id": 1,
+          "name": "Tom Gijsbers"
+        }
+      ],
+      "maxParticipants": 60,
+      "tags": [
+        "Technology",
+        "AI"
+      ],
+      "isJoined": false
+    },
+    {
+      "id": "5",
+      "name": "Summer Beach Party",
+      "eventType": "Social",
+      "date": "2025-08-05",
+      "time": "16:00",
+      "coverImage": "/uploads/event-beach.jpg",
+      "location": {
+        "id": 5
+      },
+      "organizer": {
+        "id": 1,
+        "name": "Tom Gijsbers"
+      },
+      "description": "Sun, sand & good vibes!",
+      "participants": [],
+      "maxParticipants": 100,
+      "tags": [
+        "Party",
+        "Beach",
+        "Summer"
+      ],
+      "isJoined": false
+    },
+    {
+      "id": "2bf5",
+      "name": "Test",
+      "date": "2025-05-20",
+      "time": "12:00",
+      "coverImage": "/uploads/default-event.jpg",
+      "location": {
+        "address": "Hezerhoeve",
+        "coordinates": {
+          "lat": 0,
+          "lng": 0
+        }
+      },
+      "organizer": {
+        "id": 1,
+        "name": "Current User"
+      },
+      "description": "",
+      "participants": [],
+      "maxParticipants": 10,
+      "tags": [
+        "Sneeuw"
+      ],
+      "eventType": "General"
+    }
+  ],
+  "registrations": [
+    {
+      "id": "1",
+      "userId": 1,
+      "eventId": 1
+    },
+    {
+      "id": "2",
+      "userId": 3,
+      "eventId": 1
+    },
+    {
+      "id": "3",
+      "userId": 3,
+      "eventId": 3
+    }
+  ]
+}
