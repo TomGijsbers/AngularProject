@@ -1,4 +1,27 @@
-<p>home works!</p>
-<div>
-    <app-login></app-login>
+<div class="home-container">
+  <div *ngIf="!(auth.isAuthenticated$ | async)">
+    <h2>Welcome to our Application</h2>
+    <p>Please log in to access your dashboard.</p>
+  </div>
+
+  <div *ngIf="auth.isAuthenticated$ | async">
+    <h2>Welcome back!</h2>
+    <p>You are now logged in.</p>
+    <div *ngIf="auth.user$ | async as user">
+      <p>Hello, {{ user.name || user.email }}</p>
+    </div>
+    
+    <div *ngIf="userRoles.length > 0">
+      <h3>Your Dashboard</h3>
+      <div *ngIf="userRoles.includes('eventAdmin')">
+        <p>You have admin privileges. <a routerLink="/admin/events">Go to Admin Dashboard</a></p>
+      </div>
+      <div *ngIf="userRoles.includes('TeamLeader') && !userRoles.includes('eventAdmin')">
+        <p>You are a Team Leader. <a routerLink="/events/mine">Manage Your Events</a></p>
+      </div>
+      <div *ngIf="userRoles.includes('User') && !userRoles.includes('TeamLeader') && !userRoles.includes('eventAdmin')">
+        <p>View your <a routerLink="/profile">Profile</a> or browse <a routerLink="/events">Events</a></p>
+      </div>
+    </div>
+  </div>
 </div>

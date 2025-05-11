@@ -1,25 +1,26 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
+import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  imports: [CommonModule, ButtonModule],
+  template: `
+    <button 
+      pButton 
+      class="p-button-primary" 
+      icon="pi pi-sign-in" 
+      label="Log In" 
+      (click)="login()">
+    </button>
+  `
 })
 export class LoginComponent {
-  constructor(private auth: AuthService) {}
+  auth = inject(AuthService);
 
-  handleLogin(): void {
-    this.auth.loginWithRedirect({
-      appState: {
-        target: '/',
-      },
-      authorizationParams: {
-        prompt: 'login', //other possibilities: https://auth0.github.io/auth0-spa-js/interfaces/AuthorizationParams.html#prompt,
-      },
-    });
+  login(): void {
+    this.auth.loginWithRedirect();
   }
 }

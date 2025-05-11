@@ -1,23 +1,32 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, inject } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { environment } from '../../environments/environment'; // Adjust the path as necessary
+import { DOCUMENT } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
-  selector: 'lib-logout-button',
+  selector: 'app-logout-button',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './logout-button.component.html',
-  styleUrls: ['./logout-button.component.css'],
+  imports: [CommonModule, ButtonModule],
+  template: `
+    <button 
+      pButton 
+      class="p-button-danger" 
+      icon="pi pi-sign-out" 
+      label="Log Out" 
+      (click)="logout()">
+    </button>
+  `
 })
 export class LogoutButtonComponent {
-  constructor(private auth: AuthService) {}
-  
-  handleLogout(): void {
-    this.auth.logout({
+  auth = inject(AuthService);
+  @Inject(DOCUMENT) document: Document = inject(DOCUMENT);
+
+  logout(): void {
+    this.auth.logout({ 
       logoutParams: {
-        returnTo: environment.redirectUri, // this is where we redirect to when the user is logged out
-      },
+        returnTo: this.document.location.origin
+      }
     });
   }
 }
